@@ -1,19 +1,14 @@
 import React from "react";
-import Header from "./Header";
-
-function myButton() {
-  return (
-    <button>Hello</button>
-  )
-}
+import HeaderSection from "./components/HeaderSection/HeaderSection";
+import MyButton from "./components/Button/Button";
 
 function App() {
   return (
-    <div className="">
+    <>
       <h1>Hello worlds!</h1>
-      <Header />
-      <myButton />
-    </div>
+      <HeaderSection />
+      <MyButton />
+    </>
   )
 }
 
