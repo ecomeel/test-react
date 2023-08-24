@@ -6,4 +6,11 @@ function Header() {
     )
 }
 
+function myButton() {
+    return (
+        <button>i'm button</button>
+    );
+  }
+  
+
 export default Header;
