@@ -1,8 +1,8 @@
 import React from 'react';
 
-function MyButton() {
+function MyButton({ text, onClick }) {
     return (
-        <button>I'm button!</button>
+        <button onClick={onClick}>{text}</button>
     )
 }
 
