@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import HeaderSection from "./components/HeaderSection/HeaderSection";
+import Counter from "./components/Counter/Counter";
 import MyButton from "./components/Button/Button";
 
 function App() {
@@ -11,12 +12,18 @@ function App() {
 
   function handleMinusBtnClick() {
     setCounter(counter - 1)
-    console.log(counter)
   }
 
   function handlePlusBtnClick() {
     setCounter(counter + 1)
-    console.log(counter)
+  }
+
+  function isMinusBtnDisabled() {
+    return counter === -5
+  }
+
+  function isPlusBtnDisabled() {
+    return counter === 5
   }
 
   return (
@@ -28,13 +35,15 @@ function App() {
         onClick={handleclick}
       />
 
-      <p>{counter}</p>
+      <Counter value={counter}/>
       <MyButton
         text = {'-'}
+        isDisabled = {isMinusBtnDisabled()}
         onClick = {handleMinusBtnClick}
       />
       <MyButton
         text = {'+'}
+        isDisabled={isPlusBtnDisabled()}
         onClick = {handlePlusBtnClick}
       />
     </>
