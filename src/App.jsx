@@ -9,6 +9,10 @@ const INITIAL_COUNTER_VALUE = 0;
 const COUNTER_STEP = 1;
 const MAX_COUNTER_VALUE = 5;
 const MIN_COUNTER_VALUE = -5;
+const USER_ACTIONS = {
+  MINUS: 'minus',
+  PLUS: 'plus'
+}
 
 function App() {
     const [counter, setCounter] = useState(INITIAL_COUNTER_VALUE);
@@ -23,7 +27,7 @@ function App() {
 
         const log = {
           id: uuidv4(),
-          action: 'minus',
+          action: USER_ACTIONS.MINUS,
           prevValue: counter,
           value: newCounter
         }
@@ -37,7 +41,7 @@ function App() {
 
         const log = {
           id: uuidv4(),
-          action: 'plus',
+          action: USER_ACTIONS.PLUS,
           prevValue: counter,
           value: newCounter
         } 
