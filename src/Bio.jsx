@@ -18,11 +18,13 @@ export default function Bio() {
 
     const [isError, setError] = useState(false)
 
-    function handleNameInputChange(e) {
+    function handleInputChange(e) {
+        const {name, value} = e.target
+
         setForm({
             ...form,
-            name: e.target.value,
-        });
+            [name]: value,
+        })
     }
 
     function handleSetNameBtnClick() {
@@ -37,13 +39,6 @@ export default function Bio() {
         });
     }
 
-    function handleSurnameInputChange(e) {
-        setForm({
-            ...form,
-            surname: e.target.value,
-        });
-    }
-
     function handleSetSurnameBtnClick() {
         if (!form.name) {
             setError(true);
@@ -54,13 +49,6 @@ export default function Bio() {
         setPerson({
             ...person,
             surname: form.surname,
-        });
-    }
-
-    function handleAgeInputChange(e) {
-        setForm({
-            ...form,
-            age: e.target.value,
         });
     }
 
@@ -84,7 +72,7 @@ export default function Bio() {
                 type="text"
                 name="name"
                 value={form.name}
-                onChange={handleNameInputChange}
+                onChange={handleInputChange}
             />
             <button onClick={handleSetNameBtnClick}>Задать имя</button>
 
@@ -92,16 +80,15 @@ export default function Bio() {
                 type="text"
                 name="surname"
                 value={form.surname}
-                onChange={handleSurnameInputChange}
+                onChange={handleInputChange}
             />
             <button onClick={handleSetSurnameBtnClick}>Задать surname</button>
 
             <input
                 type="number"
                 name="age"
-
                 value={form.age}
-                onChange={handleAgeInputChange}
+                onChange={handleInputChange}
             />
             <button onClick={handleSetAgeBtnClick}>Set age</button>
 
