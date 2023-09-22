@@ -15,6 +15,7 @@ export default function Bio() {
         surname: "",
         age: 0,
         sex: "male",
+        interests: ''
     });
 
     const [isError, setError] = useState(false);
@@ -29,14 +30,22 @@ export default function Bio() {
     }
 
     function handleBtnClick(key) {
-        if (!form[key]) {
+        let value = form[key];
+
+        if (!value) {
             setError(true);
             return;
         }
         setError(false);
+
+
+        if (Array.isArray(person[key])) {
+            value = [...person[key], form[key]]
+        }
+
         setPerson({
             ...person,
-            [key]: form[key],
+            [key]: value,
         });
     }
 
@@ -114,6 +123,20 @@ export default function Bio() {
                 }}
             >
                 Set sex
+            </button>
+
+            <input
+                type="text"
+                name="interests"
+                value={form.interests}
+                onChange={handleInputChange}
+            />
+            <button
+                onClick={() => {
+                    handleBtnClick("interests");
+                }}
+            >
+                Add interests
             </button>
 
             <p>Name: {person.name}</p>
