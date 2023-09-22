@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import HeaderSection from "./components/HeaderSection/HeaderSection";
 import Counter from "./components/Counter/Counter";
 import MyButton from "./components/Button/Button";
@@ -13,8 +14,6 @@ function App() {
     const [counter, setCounter] = useState(INITIAL_COUNTER_VALUE);
     const [logs, setLogs] = useState([]);
 
-    let id = 0;
-
     function handleclick() {
         console.log("button clicked");
     }
@@ -23,7 +22,7 @@ function App() {
         const newCounter = counter - COUNTER_STEP;
 
         const log = {
-          id: id,
+          id: uuidv4(),
           action: 'minus',
           prevValue: counter,
           value: newCounter
@@ -37,6 +36,7 @@ function App() {
         const newCounter = counter + COUNTER_STEP;
 
         const log = {
+          id: uuidv4(),
           action: 'plus',
           prevValue: counter,
           value: newCounter
