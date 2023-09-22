@@ -2,25 +2,31 @@ import React, {useState} from "react";
 import HeaderSection from "./components/HeaderSection/HeaderSection";
 import Counter from "./components/Counter/Counter";
 import MyButton from "./components/Button/Button";
+import Logs from './components/Logs/Logs'
 
 const INITIAL_COUNTER_VALUE = 0;
-const COUNTER_STEP = 3
+const COUNTER_STEP = 1;
 const MAX_COUNTER_VALUE = 5;
 const MIN_COUNTER_VALUE = -5
 
 function App() {
-  const [counter, setCounter] = useState(INITIAL_COUNTER_VALUE)
+  const [counter, setCounter] = useState(INITIAL_COUNTER_VALUE);
+  const [logs, setLogs] = useState([])
 
   function handleclick() {
     console.log('button clicked')
   }
 
   function handleMinusBtnClick() {
-    setCounter(counter - COUNTER_STEP)
+    const newCounter = counter - COUNTER_STEP;
+    setCounter(newCounter);
+    setLogs([...logs, newCounter])
   }
 
   function handlePlusBtnClick() {
-    setCounter(counter + COUNTER_STEP)
+    const newCounter = counter - COUNTER_STEP;
+    setCounter(newCounter);
+    setLogs([...logs, newCounter])
   }
 
   function isMinusBtnDisabled() {
@@ -56,6 +62,9 @@ function App() {
         text = {'+'}
         isDisabled={isPlusBtnDisabled()}
         onClick = {handlePlusBtnClick}
+      />
+      <Logs
+        logs = {logs}
       />
     </>
   )
