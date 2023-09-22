@@ -1,73 +1,83 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import HeaderSection from "./components/HeaderSection/HeaderSection";
 import Counter from "./components/Counter/Counter";
 import MyButton from "./components/Button/Button";
-import Logs from './components/Logs/Logs'
+import Logs from "./components/Logs/Logs";
 
 const INITIAL_COUNTER_VALUE = 0;
 const COUNTER_STEP = 1;
 const MAX_COUNTER_VALUE = 5;
-const MIN_COUNTER_VALUE = -5
+const MIN_COUNTER_VALUE = -5;
 
 function App() {
-  const [counter, setCounter] = useState(INITIAL_COUNTER_VALUE);
-  const [logs, setLogs] = useState([])
+    const [counter, setCounter] = useState(INITIAL_COUNTER_VALUE);
+    const [logs, setLogs] = useState([]);
 
-  function handleclick() {
-    console.log('button clicked')
-  }
+    let id = 0;
 
-  function handleMinusBtnClick() {
-    const newCounter = counter - COUNTER_STEP;
-    setCounter(newCounter);
-    setLogs([...logs, newCounter])
-  }
+    function handleclick() {
+        console.log("button clicked");
+    }
 
-  function handlePlusBtnClick() {
-    const newCounter = counter - COUNTER_STEP;
-    setCounter(newCounter);
-    setLogs([...logs, newCounter])
-  }
+    function handleMinusBtnClick() {
+        const newCounter = counter - COUNTER_STEP;
 
-  function isMinusBtnDisabled() {
-    return counter <= MIN_COUNTER_VALUE
-  }
+        const log = {
+          id: id,
+          action: 'minus',
+          prevValue: counter,
+          value: newCounter
+        }
 
-  function isPlusBtnDisabled() {
-    return counter >= MAX_COUNTER_VALUE
-  }
+        setCounter(newCounter);
+        setLogs([...logs, log]);
+    }
 
-  function isCounterOutLimit() {
-    return counter <= MIN_COUNTER_VALUE || counter >= MAX_COUNTER_VALUE
-  }
+    function handlePlusBtnClick() {
+        const newCounter = counter + COUNTER_STEP;
 
-  return (
-    <>
-      <h1>Hello worlds!</h1>
-      <HeaderSection />
-      <MyButton 
-        text={'Clicke me'}
-        onClick={handleclick}
-      />
+        const log = {
+          action: 'plus',
+          prevValue: counter,
+          value: newCounter
+        } 
 
-      <Counter 
-        value={counter}
-        isDanger={isCounterOutLimit()}/>
-      <MyButton
-        text = {'-'}
-        isDisabled = {isMinusBtnDisabled()}
-        onClick = {handleMinusBtnClick}
-      />
-      <MyButton
-        text = {'+'}
-        isDisabled={isPlusBtnDisabled()}
-        onClick = {handlePlusBtnClick}
-      />
-      <Logs
-        logs = {logs}
-      />
-    </>
-  )
+        setCounter(newCounter);
+        setLogs([...logs, log]);
+    }
+
+    function isMinusBtnDisabled() {
+        return counter <= MIN_COUNTER_VALUE;
+    }
+
+    function isPlusBtnDisabled() {
+        return counter >= MAX_COUNTER_VALUE;
+    }
+
+    function isCounterOutLimit() {
+        return counter <= MIN_COUNTER_VALUE || counter >= MAX_COUNTER_VALUE;
+    }
+
+    return (
+        <>
+            <h1>Hello worlds!</h1>
+            <HeaderSection />
+            <MyButton text={"Clicke me"} onClick={handleclick} />
+
+            <Counter value={counter} isDanger={isCounterOutLimit()} />
+            <MyButton
+                text={"-"}
+                isDisabled={isMinusBtnDisabled()}
+                onClick={handleMinusBtnClick}
+            />
+            <MyButton
+                text={"+"}
+                isDisabled={isPlusBtnDisabled()}
+                onClick={handlePlusBtnClick}
+            />
+            <Logs logs={logs} />
+        </>
+    );
 }
 
-export default App
+export default App;
