@@ -16,65 +16,45 @@ export default function Bio() {
         age: 0,
     });
 
-    const [isError, setError] = useState(false)
+    const [isError, setError] = useState(false);
 
     function handleInputChange(e) {
-        const {name, value} = e.target
+        const { name, value } = e.target;
 
         setForm({
             ...form,
             [name]: value,
-        })
-    }
-
-    function handleSetNameBtnClick() {
-        if (!form.name) {
-            setError(true);
-            return
-        }
-        setError(false)
-        setPerson({
-            ...person,
-            name: form.name,
         });
     }
 
-    function handleSetSurnameBtnClick() {
-        if (!form.name) {
+    function handleBtnClick(key) {
+        if (!form[key]) {
             setError(true);
-            return
+            return;
         }
-        setError(false)
-
+        setError(false);
         setPerson({
             ...person,
-            surname: form.surname,
-        });
-    }
-
-    function handleSetAgeBtnClick() {
-        if (!form.name) {
-            setError(true);
-            return
-        }
-        setError(false)
-
-        setPerson({
-            ...person,
-            age: parseInt(form.age),
+            [key]: form[key],
         });
     }
 
     return (
         <div>
-            {isError ? (<p>Input Error</p>) : ''}
+            {isError ? <p>Input Error</p> : ""}
             <input
                 type="text"
                 name="name"
                 value={form.name}
                 onChange={handleInputChange}
             />
-            <button onClick={handleSetNameBtnClick}>Задать имя</button>
+            <button
+                onClick={() => {
+                    handleBtnClick("name");
+                }}
+            >
+                Задать имя
+            </button>
 
             <input
                 type="text"
@@ -82,7 +62,13 @@ export default function Bio() {
                 value={form.surname}
                 onChange={handleInputChange}
             />
-            <button onClick={handleSetSurnameBtnClick}>Задать surname</button>
+            <button
+                onClick={() => {
+                    handleBtnClick("surname");
+                }}
+            >
+                Задать surname
+            </button>
 
             <input
                 type="number"
@@ -90,7 +76,13 @@ export default function Bio() {
                 value={form.age}
                 onChange={handleInputChange}
             />
-            <button onClick={handleSetAgeBtnClick}>Set age</button>
+            <button
+                onClick={() => {
+                    handleBtnClick("age");
+                }}
+            >
+                Set age
+            </button>
 
             <p>Name: {person.name}</p>
             <p>Surname: {person.surname}</p>
