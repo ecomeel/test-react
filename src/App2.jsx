@@ -16,9 +16,9 @@ export default function App2() {
         .then(response => response.json())
         .then(data => {
             console.log(data)
-            // setUsers(data)
+            setUsers(data)
         })
-    });
+    }, []);
 
     return (
         <div>
