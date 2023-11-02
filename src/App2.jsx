@@ -1,48 +1,42 @@
-import 
-    React,
-    {
-        useState,
-        useEffect
-    } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function App2() {
-
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    
-    console.log('component rendered')
+    const [isError, setIsError] = useState(false);
+
+    console.log("component rendered");
 
     useEffect(() => {
-        setIsLoading(true)
+        setIsLoading(true);
+        setIsError(false);
 
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            setUsers(data)
-            setIsLoading(false)
-        })
+        fetch("https://jsonplaceholder.typicode.com/userss")
+            .then((response) => {
+                if (!response.ok) {
+                    console.log('response error');
+                    throw new Error('error in response')
+                }
+
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+                setUsers(data);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                setIsLoading(false);
+                setIsError(true);
+            });
     }, []);
 
-    // const [count, setCount] = useState(0);
-
-    // console.log('components rendered')
-
-    // useEffect(() => {
-    //     console.log('useEffect call')
-    //     localStorage.setItem('count', count)
-    // }, [count]);
     return (
         <div>
-            {isLoading ? 'loading' : JSON.stringify(users)}
+            {isError && "request error!"}
+            {isLoading && 'loading'}
+            {users && JSON.stringify(users)}
         </div>
-        // <div>
-        //     {count}
-        //     <div>
-        //         <button onClick={() => setCount(count + 1)}>
-        //             Counter ++
-        //         </button>
-        //     </div>
-        // </div>
-    )
+    );
 }
