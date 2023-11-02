@@ -1,4 +1,9 @@
-import React, {useState} from "react";
+import 
+    React,
+    {
+        useState,
+        useEffect
+    } from "react";
 
 export default function App2() {
 
@@ -6,13 +11,14 @@ export default function App2() {
     
     console.log('component rendered')
 
-    fetch('https://jsonplaceholder.typicode.com/users')
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/users')
         .then(response => response.json())
         .then(data => {
             console.log(data)
             // setUsers(data)
         })
-
+    });
 
     return (
         <div>
